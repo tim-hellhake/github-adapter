@@ -1,7 +1,7 @@
 {
   "name": "github-adapter",
   "display_name": "Github",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Watch your favourite github repos",
   "main": "index.js",
   "scripts": {
@@ -42,7 +42,7 @@
           "title": "This list of repositories that should be watched",
           "items": {
             "type": "string",
-            "title": "A repository",
+            "title": "A repository (e.g. mozilla-iot/gateway)",
             "examples": [
               "mozilla-iot/gateway"
             ]
