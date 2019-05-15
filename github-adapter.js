@@ -18,17 +18,16 @@ class Repository extends Device {
   constructor(adapter, repo) {
     super(adapter, repo.replace('/', '-'));
     this['@context'] = 'https://iot.mozilla.org/schemas/';
-    this['@type'] = ['MultiLevelSensor'];
-    this.name = `Github ${repo}`;
-    this.description = 'Github repository';
+    this['@type'] = [];
+    this.name = `GitHub ${repo}`;
+    this.description = 'GitHub repository';
     this.repo = repo;
 
     this.addProperty({
-      type: 'number',
-      '@type': 'LevelProperty',
-      title: 'open issues',
+      type: 'integer',
+      title: 'Open Issues',
       description: 'The number of open issues',
-      readOnly: true
+      readOnly: true,
     });
   }
 
@@ -48,7 +47,7 @@ class Repository extends Device {
   async poll() {
     const result = await fetch(`https://api.github.com/repos/${this.repo}`);
     const json = await result.json();
-    this.updateValue('open issues', json.open_issues);
+    this.updateValue('Open Issues', json.open_issues);
   }
 
   updateValue(name, value) {
@@ -59,10 +58,14 @@ class Repository extends Device {
   }
 }
 
-class GithubAdapter extends Adapter {
+class GitHubAdapter extends Adapter {
   constructor(addonManager, manifest) {
-    super(addonManager, GithubAdapter.name, manifest.name);
+    super(addonManager, GitHubAdapter.name, manifest.name);
     addonManager.addAdapter(this);
+
+    if (!manifest.moziot.config.repos) {
+      return;
+    }
 
     for (const name of manifest.moziot.config.repos) {
       console.log(`Creating repository for ${name}`);
@@ -73,4 +76,4 @@ class GithubAdapter extends Adapter {
   }
 }
 
-module.exports = GithubAdapter;
+module.exports = GitHubAdapter;
