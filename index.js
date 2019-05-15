@@ -6,7 +6,7 @@
 
 'use strict';
 
-const GithubAdapter = require('./github-adapter');
+const GitHubAdapter = require('./github-adapter');
 
 module.exports =
-    (addonManager, manifest) => new GithubAdapter(addonManager, manifest);
+    (addonManager, manifest) => new GitHubAdapter(addonManager, manifest);
