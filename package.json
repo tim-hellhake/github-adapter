@@ -1,7 +1,7 @@
 {
   "name": "github-adapter",
   "display_name": "GitHub",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "Watch your favourite GitHub repos",
   "main": "index.js",
   "scripts": {
