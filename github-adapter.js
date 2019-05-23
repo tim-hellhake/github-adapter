@@ -18,7 +18,6 @@ class Repository extends Device {
   constructor(adapter, repo) {
     super(adapter, repo.replace('/', '-'));
     this['@context'] = 'https://iot.mozilla.org/schemas/';
-    this['@type'] = [];
     this.name = `GitHub ${repo}`;
     this.description = 'GitHub repository';
     this.repo = repo;
