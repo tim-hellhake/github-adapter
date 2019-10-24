@@ -6,7 +6,7 @@
 [![optionalDependencies](https://david-dm.org/tim-hellhake/github-adapter/optional-status.svg)](https://david-dm.org/tim-hellhake/github-adapter?type=optional)
 [![license](https://img.shields.io/badge/license-MPL--2.0-blue.svg)](LICENSE)
 
-Watch your favourite GitHub repos.
+Watch the issue count of your favourite GitHub repos.
 
 ## Configuration
 1. Go to configuration

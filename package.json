@@ -2,7 +2,7 @@
   "name": "github-adapter",
   "display_name": "GitHub",
   "version": "0.1.2",
-  "description": "Watch your favourite GitHub repos",
+  "description": "Watch the issue count of your favourite GitHub repos",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
