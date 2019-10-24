@@ -1,0 +1,40 @@
+{
+  "manifest_version": 1,
+  "id": "github-adapter",
+  "name": "GitHub",
+  "short_name": "GitHub",
+  "version": "0.1.2",
+  "description": "Watch the issue count of your favourite GitHub repos",
+  "homepage_url": "https://github.com/tim-hellhake/github-adapter#readme",
+  "license": "MPL-2.0",
+  "author": "Tim Hellhake",
+  "gateway_specific_settings": {
+    "webthings": {
+      "exec": "{nodeLoader} {path}",
+      "strict_min_version": "0.10.0",
+      "strict_max_version": "*",
+      "primary_type": "adapter"
+    }
+  },
+  "options": {
+    "schema": {
+      "type": "object",
+      "required": [
+        "repos"
+      ],
+      "properties": {
+        "repos": {
+          "type": "array",
+          "title": "This list of repositories that should be watched",
+          "items": {
+            "type": "string",
+            "title": "A repository (e.g. mozilla-iot/gateway)",
+            "examples": [
+              "mozilla-iot/gateway"
+            ]
+          }
+        }
+      }
+    }
+  }
+}
