@@ -28,6 +28,14 @@ class Repository extends Device {
       description: 'The number of open issues',
       readOnly: true,
     });
+
+    this.links = [
+      {
+        rel: 'alternate',
+        mediaType: 'text/html',
+        href: `https://github.com/${repo}/issues`,
+      },
+    ];
   }
 
   addProperty(description) {
