@@ -6,23 +6,22 @@
 
 'use strict';
 
-const fetch = require('node-fetch');
+import { Adapter, Device, Property } from 'gateway-addon';
 
-const {
-  Adapter,
-  Device,
-  Property
-} = require('gateway-addon');
+import fetch from 'node-fetch';
 
-class Repository extends Device {
-  constructor(adapter, repo) {
+export class Repository extends Device {
+  private repo: string;
+  private issuesProperty: Property;
+
+  constructor(adapter: Adapter, repo: string) {
     super(adapter, repo.replace('/', '-'));
     this['@context'] = 'https://iot.mozilla.org/schemas/';
     this.name = `GitHub ${repo}`;
     this.description = 'GitHub repository';
     this.repo = repo;
 
-    this.addProperty({
+    this.issuesProperty = this.createProperty('issues', {
       type: 'integer',
       title: 'Open Issues',
       description: 'The number of open issues',
@@ -38,15 +37,16 @@ class Repository extends Device {
     ];
   }
 
-  addProperty(description) {
-    const property = new Property(this, description.title, description);
-    this.properties.set(description.title, property);
+  createProperty(name: string, description: any) {
+    const property = new Property(this, name, description);
+    this.properties.set(name, property);
+    return property;
   }
 
-  startPolling(interval) {
+  startPolling(interval: number) {
     this.poll();
 
-    this.timer = setInterval(() => {
+    setInterval(() => {
       this.poll();
     }, interval * 1000);
   }
@@ -57,16 +57,15 @@ class Repository extends Device {
     this.updateValue('Open Issues', json.open_issues);
   }
 
-  updateValue(name, value) {
+  updateValue(name: string, value: any) {
     console.log(`Set ${name} to ${value}`);
-    const property = this.properties.get(name);
-    property.setCachedValue(value);
-    this.notifyPropertyChanged(property);
+    this.issuesProperty.setCachedValue(value);
+    this.notifyPropertyChanged(this.issuesProperty);
   }
 }
 
-class GitHubAdapter extends Adapter {
-  constructor(addonManager, manifest) {
+export class GitHubAdapter extends Adapter {
+  constructor(addonManager: any, manifest: any) {
     super(addonManager, GitHubAdapter.name, manifest.name);
     addonManager.addAdapter(this);
 
@@ -82,5 +81,3 @@ class GitHubAdapter extends Adapter {
     }
   }
 }
-
-module.exports = GitHubAdapter;
