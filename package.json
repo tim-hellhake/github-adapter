@@ -1,7 +1,7 @@
 {
   "name": "github-adapter",
   "display_name": "GitHub",
-  "version": "0.1.3",
+  "version": "0.1.4",
   "description": "Watch the issue count of your favourite GitHub repos",
   "main": "index.js",
   "scripts": {
