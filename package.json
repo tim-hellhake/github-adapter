@@ -21,8 +21,8 @@
   "files": [
     "LICENSE",
     "SHA256SUMS",
-    "index.js",
-    "github-adapter.js",
+    "lib/index.js",
+    "lib/github-adapter.js",
     "manifest.json"
   ],
   "moziot": {
